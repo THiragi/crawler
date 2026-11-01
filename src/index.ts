@@ -33,7 +33,7 @@ export default {
 
 		const body = await request.json<{urls: string[]}>();
 		const urls: string[] = isStringArray(body.urls) ? body.urls : [];
-		console.log(urls)
+
 		if (urls.length === 0) {
 			return new Response(JSON.stringify({ error: "Urls is required" }), { status: 400, headers });
 		}
