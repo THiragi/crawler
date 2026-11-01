@@ -46,12 +46,18 @@ export default {
 				const ogp = JSON.parse(cache);
 				if (isOgpData(ogp)) {
 					return ogp
-				}
-			}
-			const newOgp = await getOgp(url);
-			await env.OGP_CACHE.put(url, JSON.stringify(newOgp), { expirationTtl: 604800 });
+				} else {
+					const newOgp = await getOgp(url);
+					await env.OGP_CACHE.put(url, JSON.stringify(newOgp), { expirationTtl: 604800 });
 
-			return newOgp;
+					return newOgp;
+				}
+			} else {
+				const newOgp = await getOgp(url);
+				await env.OGP_CACHE.put(url, JSON.stringify(newOgp), { expirationTtl: 604800 });
+
+				return newOgp;
+			}
 			
 		})).then((result) => {
 			return new Response(JSON.stringify({result}), {
