@@ -48,7 +48,7 @@ export default {
 					return ogp
 				}
 			}
-			const newOgp = getOgp(url);
+			const newOgp = await getOgp(url);
 			await env.OGP_CACHE.put(url, JSON.stringify(newOgp), { expirationTtl: 604800 });
 
 			return newOgp;
