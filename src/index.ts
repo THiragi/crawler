@@ -27,9 +27,7 @@ export default {
 			"Access-Control-Allow-Origin": "*"
 		};
 
-		if (request.headers.get("X-Custom-Auth") !== env.API_SECRET || 
-			request.headers.get('Content-Type')?.includes('application/json') || 
-			request.method !== 'POST') {
+		if (request.headers.get("X-Custom-Auth") !== env.API_SECRET) {
 			return new Response(JSON.stringify({ error: "Unauthorized" }), {
 				status: 401,
 				headers,
