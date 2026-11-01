@@ -19,9 +19,6 @@ export interface Env {
 
 export default {
 	async fetch(request, env): Promise<Response> {
-		
-		const url = new URL(request.url);
-		const targetUrl = url.searchParams.get("url");
 		const headers = {
 			"Content-Type": "application/json; charset=utf-8",
 			"Access-Control-Allow-Origin": "*"
@@ -53,8 +50,8 @@ export default {
 			return new Response(JSON.stringify({result}), {
 				headers,
 				status: 200
-		})}).catch(() => {
-			return new Response(JSON.stringify({ error: 'Unexpected error' }), {
+		})}).catch((e) => {
+			return new Response(JSON.stringify({ error: e.message }), {
 				headers,
 				status: 500
 			});
